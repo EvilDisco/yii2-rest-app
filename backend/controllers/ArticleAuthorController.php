@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Article\ArticleAuthor;
+use yii\data\ActiveDataFilter;
 use yii\rest\ActiveController;
 
 class ArticleAuthorController extends ActiveController
@@ -18,6 +19,11 @@ class ArticleAuthorController extends ActiveController
             $actions['create'],
             $actions['update'],
         );
+
+        $actions['index']['dataFilter'] = [
+            'class' => ActiveDataFilter::class,
+            'searchModel' => $this->modelClass,
+        ];
 
         return $actions;
     }
