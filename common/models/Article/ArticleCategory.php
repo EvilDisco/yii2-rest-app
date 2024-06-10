@@ -74,6 +74,18 @@ final class ArticleCategory extends ActiveRecord
             'name' => 'Название',
             'desc' => 'Описание',
             'parent_id' => 'Родительская категория',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+        ];
+    }
+
+    public function fields(): array
+    {
+        return [
+            'id',
+            'name',
+            'desc',
+            'parent', // FIXME: ограничение глубины
         ];
     }
 

@@ -59,6 +59,18 @@ final class ArticleAuthor extends ActiveRecord
             'full_name' => 'ФИО',
             'birth_year' => 'Год рождения',
             'bio' => 'Биография',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+        ];
+    }
+
+    public function fields(): array
+    {
+        return [
+            'id',
+            'full_name',
+            'birth_year',
+            'bio',
         ];
     }
 }

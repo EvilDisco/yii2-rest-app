@@ -67,6 +67,37 @@ final class Article extends ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'id' => 'ID',
+            'title' => 'Название',
+            'preview' => 'Анонс',
+            'text' => 'Текст',
+            'image' => 'Изображение',
+            'author' => 'Автор',
+            'categories' => 'Категории',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+        ];
+    }
+
+    public function fields(): array
+    {
+        return [
+            'id',
+            'title',
+            'preview',
+            'text',
+            'image',
+            'author',
+            'categories',
+        ];
+    }
+
     public function getAuthor(): ActiveQuery
     {
         return $this->hasOne(ArticleAuthor::class, ['id' => 'author_id']);
