@@ -114,6 +114,7 @@ class m240609_232439_add_base_article_tables extends Migration
     {
         $this->dropForeignKey(self::FOREIGN_KEY_ARTICLE_CATEGORY_JUNCTION_CATEGORY, Article::CATEGORY_JUNCTION_TABLE_NAME);
         $this->dropForeignKey(self::FOREIGN_KEY_ARTICLE_CATEGORY_JUNCTION_ARTICLE, Article::CATEGORY_JUNCTION_TABLE_NAME);
+        $this->dropTable(Article::CATEGORY_JUNCTION_TABLE_NAME);
 
         $this->dropForeignKey(self::FOREIGN_KEY_ARTICLE_AUTHOR, Article::tableName());
         $this->dropTable(Article::tableName());
