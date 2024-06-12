@@ -30,10 +30,10 @@
 ### Работа с API
 
 Доступны следующие эндпоинты API (общий префикс - http://127.0.0.1:21080/index.php):
-* GET `/article-author` - коллекция авторов статей
-* GET `/article-author/{id}` - автор статей
-* GET `/article-category` - коллекция категорий статей
-* GET `/article-category/{id}` - категория статьи
+* GET `/authors` - коллекция авторов статей
+* GET `/authors/{id}` - автор статей
+* GET `/categories` - коллекция категорий статей
+* GET `/categories/{id}` - категория статьи
 * GET `/articles` - коллекция статей
 * GET `/articles/{id}` - статья
 
@@ -58,11 +58,9 @@
 
 ### Дорожная карта
 
-* роутинг
-* readme - поиск, пагинация, сортировка
 * DTO - ArticleDtoBuilder и т.д.
-* картинки
 * тесты респонсов
+* readme - поиск, пагинация, сортировка
 * картинки + генерация превью
 * FIXME и TODO
 * Apache -> nginx

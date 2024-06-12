@@ -42,12 +42,11 @@ return [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'articleAuthor',
+                    'controller' => 'author',
                     'except' => [
                         'delete',
                         'create',
@@ -56,7 +55,7 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'articleCategory',
+                    'controller' => 'category',
                     'except' => [
                         'delete',
                         'create',
