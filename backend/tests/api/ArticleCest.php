@@ -20,7 +20,7 @@ class ArticleCest
                 'title' => 'string',
                 'preview' => 'string',
                 'text' => 'string',
-                'image' => 'string',
+                'image' => 'string:url',
                 'author' => [
                     'id' => 'integer',
                     'full_name' => 'string',
@@ -52,7 +52,7 @@ class ArticleCest
             'title' => 'string',
             'preview' => 'string',
             'text' => 'string',
-            'image' => 'string',
+            'image' => 'string:url',
             'author' => [
                 'id' => 'integer',
                 'full_name' => 'string',
