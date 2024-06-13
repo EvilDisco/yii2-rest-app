@@ -53,15 +53,16 @@
 ```
 2. Создайте тестовую базу с названием, указанным в `.env`-переменной `TEST_DB_DSN`. Если контейнеры запущены, перезапустите их.
 3. Запустите миграции для тестовой базы данных: `docker-compose run --rm backend yii_test migrate`
-4. Сгенерируйте вспомогательные файлы для тестового окружения: `docker-compose run --rm backend vendor/bin/codecept build`
-5. Запустите тесты: `docker-compose run --rm backend vendor/bin/codecept run`
+4. Разверните сиды / фикстуры для тестовой базы данных: `docker-compose run --rm backend yii_test seed/articles`
+5. Сгенерируйте вспомогательные файлы для тестового окружения: `docker-compose run --rm backend vendor/bin/codecept build`
+6. Запустите тесты: `docker-compose run --rm backend vendor/bin/codecept run backend/tests`
 
 ### Дорожная карта
 
 * DTO - ArticleDtoBuilder и т.д.
-* тесты респонсов
 * readme - поиск, пагинация, сортировка
 * картинки + генерация превью
+* полноценные фикстуры тестов
 * FIXME и TODO
 * Apache -> nginx
 * роутинг через `/api/v1` + pluralize

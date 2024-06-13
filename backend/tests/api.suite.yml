@@ -1,0 +1,10 @@
+suite_namespace: common\tests\api
+actor: ApiTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: 'http://127.0.0.1:21080/index-test.php/'
+        - Yii2:
+            depends: PhpBrowser
+        - REST:
+            depends: Yii2
