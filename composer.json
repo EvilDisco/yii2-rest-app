@@ -11,10 +11,13 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.2",
+        "ext-gd": "*",
         "yiisoft/yii2": "~2.0.45",
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "yiisoft/yii2-symfonymailer": "~2.0.3",
-        "yiithings/yii2-dotenv": "^1.1"
+        "yiithings/yii2-dotenv": "^1.1",
+        "daxslab/yii2-thumbnailer": "*",
+        "bilions/faker-images": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

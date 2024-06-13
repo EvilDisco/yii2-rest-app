@@ -2,6 +2,7 @@
 
 namespace common\models\Article;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -92,7 +93,9 @@ final class Article extends ActiveRecord
             'title',
             'preview',
             'text',
-            'image',
+            'image' => function () {
+                return Yii::$app->thumbnailer->get($this->image);
+            },
             'author',
             'categories',
         ];

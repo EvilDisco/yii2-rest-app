@@ -73,6 +73,13 @@ return [
                 ],
             ],
         ],
+        'thumbnailer' => [
+            'class' => 'daxslab\thumbnailer\Thumbnailer',
+            'defaultWidth' => 350,
+            'defaultHeight' => 350,
+            'thumbnailsBaseUrl' => '@uploads/thumbs',
+            'enableCaching' => true,
+        ],
     ],
     'params' => $params,
 ];

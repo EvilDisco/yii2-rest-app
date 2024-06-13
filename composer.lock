@@ -4,8 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33695a9b91699ea31027615e2c191d3b",
+    "content-hash": "48d2ca59909e3fffb78403f07a49eebd",
     "packages": [
+        {
+            "name": "bilions/faker-images",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bilions-org/faker-bilions-images.git",
+                "reference": "49b707042857f7e496c9e1c95c41b70de8c6bbee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bilions-org/faker-bilions-images/zipball/49b707042857f7e496c9e1c95c41b70de8c6bbee",
+                "reference": "49b707042857f7e496c9e1c95c41b70de8c6bbee",
+                "shasum": ""
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.20"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bilions\\FakerImages\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AJ",
+                    "email": "necessarylion@gmail.com"
+                }
+            ],
+            "description": "Faker image provider for Laravel faker",
+            "support": {
+                "issues": "https://github.com/bilions-org/faker-bilions-images/issues",
+                "source": "https://github.com/bilions-org/faker-bilions-images/tree/v1.0.1"
+            },
+            "time": "2022-10-09T06:48:27+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v5.2.3",
@@ -159,6 +199,52 @@
                 "source": "https://github.com/cebe/markdown"
             },
             "time": "2018-03-26T11:24:36+00:00"
+        },
+        {
+            "name": "daxslab/yii2-thumbnailer",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/daxslab/yii2-thumbnailer.git",
+                "reference": "20b15bbff4a85a73877bfa03dd16e5f7c610b0d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/daxslab/yii2-thumbnailer/zipball/20b15bbff4a85a73877bfa03dd16e5f7c610b0d3",
+                "reference": "20b15bbff4a85a73877bfa03dd16e5f7c610b0d3",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-imagine": "~2.2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "daxslab\\thumbnailer\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel A. López López",
+                    "email": "glpz@daxslab.com"
+                }
+            ],
+            "description": "Yii2 component to generate image thumnails of any size",
+            "keywords": [
+                "image",
+                "thumbnail",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/daxslab/yii2-thumbnailer/issues",
+                "source": "https://github.com/daxslab/yii2-thumbnailer/tree/master"
+            },
+            "time": "2020-02-26T17:32:35+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -426,6 +512,68 @@
                 }
             ],
             "time": "2023-11-12T22:16:48+00:00"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "1.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-imagine/Imagine.git",
+                "reference": "7151d553edec4dc2bbac60419f7a74ff34700e7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-imagine/Imagine/zipball/7151d553edec4dc2bbac60419f7a74ff34700e7f",
+                "reference": "7151d553edec4dc2bbac60419f7a74ff34700e7f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.4 || ^9.3"
+            },
+            "suggest": {
+                "ext-exif": "to read EXIF metadata",
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Imagine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "support": {
+                "issues": "https://github.com/php-imagine/Imagine/issues",
+                "source": "https://github.com/php-imagine/Imagine/tree/1.3.5"
+            },
+            "time": "2023-06-07T14:49:52+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2014,6 +2162,64 @@
                 }
             ],
             "time": "2020-06-24T00:04:01+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-imagine",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-imagine.git",
+                "reference": "8637f63ee2eb81b7fe1f4c0e16cc8cc474a68bae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/8637f63ee2eb81b7fe1f4c0e16cc8cc474a68bae",
+                "reference": "8637f63ee2eb81b7fe1f4c0e16cc8cc474a68bae",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "^0.6 | ^0.7 | ^1.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "<7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
+                "yii2"
+            ],
+            "support": {
+                "forum": "http://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/yii2-imagine/issues",
+                "source": "https://github.com/yiisoft/yii2-imagine",
+                "wiki": "http://www.yiiframework.com/wiki/"
+            },
+            "time": "2019-06-04T12:38:50+00:00"
         },
         {
             "name": "yiisoft/yii2-symfonymailer",
@@ -6521,7 +6727,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "ext-gd": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"

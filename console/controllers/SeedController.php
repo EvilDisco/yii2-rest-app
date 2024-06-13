@@ -2,6 +2,7 @@
 
 namespace console\controllers;
 
+use Bilions\FakerImages\FakerImageProvider;
 use common\models\Article\Article;
 use common\models\Article\ArticleAuthor;
 use common\models\Article\ArticleCategory;
@@ -13,12 +14,14 @@ use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Exception;
 use yii\helpers\BaseConsole;
+use yii\helpers\Console;
+use yii\helpers\StringHelper;
 
 final class SeedController extends Controller
 {
-    private const COUNT_ARTICLE_AUTHORS = 15;
-    private const COUNT_ARTICLE_CATEGORIES = 15;
-    private const COUNT_ARTICLES = 50;
+    private const COUNT_ARTICLE_AUTHORS = 10;
+    private const COUNT_ARTICLE_CATEGORIES = 10;
+    private const COUNT_ARTICLES = 20;
 
     private Generator $faker;
 
@@ -58,9 +61,19 @@ final class SeedController extends Controller
 
     private function emptyTables(): void
     {
+        $this->stdout(
+            $this->ansiFormat('Очищаю базовые таблицы (статьи, категории, авторы)...') . PHP_EOL
+        );
+
         Article::deleteAll();
         ArticleCategory::deleteAll();
         ArticleAuthor::deleteAll();
+
+        $this->stdout(
+            $this->ansiFormat('Таблицы очищены') . PHP_EOL
+        );
+
+        $this->stdout(PHP_EOL);
     }
 
     /**
@@ -68,6 +81,12 @@ final class SeedController extends Controller
      */
     private function seedArticleAuthors(): array
     {
+        $this->stdout(
+            $this->ansiFormat('Генерация авторов...') . PHP_EOL
+        );
+
+        Console::startProgress(0, self::COUNT_ARTICLE_AUTHORS);
+
         $authors = [];
 
         for ($i = 0; $i < self::COUNT_ARTICLE_AUTHORS; $i++) {
@@ -78,7 +97,11 @@ final class SeedController extends Controller
             $author->save();
 
             $authors[] = $author;
+
+            Console::updateProgress($i + 1,self::COUNT_ARTICLE_AUTHORS);
         }
+
+        Console::endProgress('Готово' . PHP_EOL . PHP_EOL);
 
         return $authors;
     }
@@ -88,6 +111,12 @@ final class SeedController extends Controller
      */
     private function seedArticleCategories(): array
     {
+        $this->stdout(
+            $this->ansiFormat('Генерация категорий...') . PHP_EOL
+        );
+
+        Console::startProgress(0, self::COUNT_ARTICLE_CATEGORIES);
+
         $categories = [];
 
         for ($i = 0; $i < self::COUNT_ARTICLE_CATEGORIES; $i++) {
@@ -105,7 +134,11 @@ final class SeedController extends Controller
             $category->save();
 
             $categories[] = $category;
+
+            Console::updateProgress($i + 1,self::COUNT_ARTICLE_CATEGORIES);
         }
+
+        Console::endProgress('Готово' . PHP_EOL . PHP_EOL);
 
         return $categories;
     }
@@ -115,12 +148,20 @@ final class SeedController extends Controller
      */
     private function seedArticles(array $authors, array $categories): void
     {
+        $this->stdout(
+            $this->ansiFormat('Генерация статей...') . PHP_EOL
+        );
+
+        Console::startProgress(0, self::COUNT_ARTICLES);
+
         for ($i = 0; $i < self::COUNT_ARTICLES; $i++) {
             $article = new Article();
             $article->title = $this->faker->words(5, true);
-            $article->preview = $this->faker->text(50);
             $article->text = $this->faker->text();
-            $article->image = $this->faker->words(2, true);
+            $article->preview = StringHelper::truncateWords($article->text, 15);
+
+            $this->faker->addProvider(new FakerImageProvider($this->faker));
+            $article->image = $this->faker->image(Yii::getAlias('@uploads'));
 
             $article->link('author', $this->faker->randomElement($authors));
 
@@ -129,6 +170,10 @@ final class SeedController extends Controller
             }
 
             $article->save();
+
+            Console::updateProgress($i + 1,self::COUNT_ARTICLES);
         }
+
+        Console::endProgress('Готово' . PHP_EOL . PHP_EOL);
     }
 }
