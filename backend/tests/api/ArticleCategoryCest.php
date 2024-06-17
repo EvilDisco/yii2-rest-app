@@ -7,7 +7,7 @@ use Codeception\Util\HttpCode;
 
 class ArticleCategoryCest
 {
-    private const API_BASE_PATH = '/categories';
+    private const API_BASE_PATH = '/api/v1/categories';
 
     public function testGetArticleCategoriesList(ApiTester $I): void
     {

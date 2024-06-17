@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\api\v1;
 
 use common\models\Article\Article;
 use yii\data\ActiveDataFilter;

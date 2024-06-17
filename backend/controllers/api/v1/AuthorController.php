@@ -1,14 +1,14 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\api\v1;
 
-use common\models\Article\ArticleCategory;
+use common\models\Article\ArticleAuthor;
 use yii\data\ActiveDataFilter;
 use yii\rest\ActiveController;
 
-class CategoryController extends ActiveController
+class AuthorController extends ActiveController
 {
-    public $modelClass = ArticleCategory::class;
+    public $modelClass = ArticleAuthor::class;
 
     public function actions(): array
     {

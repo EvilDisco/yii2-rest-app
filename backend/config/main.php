@@ -46,7 +46,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'author',
+                    'controller' => 'api/v1/author',
                     'except' => [
                         'delete',
                         'create',
@@ -55,7 +55,7 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'category',
+                    'controller' => 'api/v1/category',
                     'except' => [
                         'delete',
                         'create',
@@ -64,7 +64,7 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'article',
+                    'controller' => 'api/v1/article',
                     'except' => [
                         'delete',
                         'create',

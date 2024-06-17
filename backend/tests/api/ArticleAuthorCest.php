@@ -7,7 +7,7 @@ use Codeception\Util\HttpCode;
 
 class ArticleAuthorCest
 {
-    private const API_BASE_PATH = '/authors';
+    private const API_BASE_PATH = '/api/v1/authors';
 
     public function testGetArticleAuthorsList(ApiTester $I): void
     {
