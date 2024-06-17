@@ -6,6 +6,7 @@ use Bilions\FakerImages\FakerImageProvider;
 use common\models\Article\Article;
 use common\models\Article\ArticleAuthor;
 use common\models\Article\ArticleCategory;
+use common\services\FileService;
 use Faker\Factory;
 use Faker\Generator;
 use Throwable;
@@ -25,6 +26,13 @@ final class SeedController extends Controller
 
     private Generator $faker;
 
+    public bool $add = false;
+
+    public function options($actionID): array
+    {
+        return array_merge(parent::options($actionID), ['add']);
+    }
+
     /**
      * @throws Exception
      * @throws Throwable
@@ -37,7 +45,10 @@ final class SeedController extends Controller
         $transaction = $db->beginTransaction();
 
         try {
-            $this->emptyTables();
+            if (!$this->add) {
+                // TODO: emptyTablesAndRemoveImages
+                $this->emptyTables();
+            }
 
             $authors = $this->seedArticleAuthors();
             $categories = $this->seedArticleCategories();
@@ -62,7 +73,7 @@ final class SeedController extends Controller
     private function emptyTables(): void
     {
         $this->stdout(
-            $this->ansiFormat('Очищаю базовые таблицы (статьи, категории, авторы)...') . PHP_EOL
+            $this->ansiFormat('Очищаем базовые таблицы (статьи, категории, авторы)...') . PHP_EOL
         );
 
         Article::deleteAll();
@@ -145,12 +156,15 @@ final class SeedController extends Controller
 
     /**
      * @throws Exception
+     * @throws \yii\base\Exception
      */
     private function seedArticles(array $authors, array $categories): void
     {
         $this->stdout(
             $this->ansiFormat('Генерация статей...') . PHP_EOL
         );
+
+        $this->faker->addProvider(new FakerImageProvider($this->faker));
 
         Console::startProgress(0, self::COUNT_ARTICLES);
 
@@ -160,8 +174,9 @@ final class SeedController extends Controller
             $article->text = $this->faker->text();
             $article->preview = StringHelper::truncateWords($article->text, 15);
 
-            $this->faker->addProvider(new FakerImageProvider($this->faker));
-            $article->image = $this->faker->image(Yii::getAlias('@uploads'));
+            $imageFolder = FileService::prepareUploadFolder();
+            $imageServerPath = $this->faker->image($imageFolder);
+            $article->image = FileService::getRelativeUploadPath($imageServerPath);
 
             $article->link('author', $this->faker->randomElement($authors));
 

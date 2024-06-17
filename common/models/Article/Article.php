@@ -2,7 +2,7 @@
 
 namespace common\models\Article;
 
-use Yii;
+use common\services\FileService;
 use yii\base\InvalidConfigException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -93,8 +93,11 @@ final class Article extends ActiveRecord
             'title',
             'preview',
             'text',
+            'image',
             'image' => function () {
-                return Yii::$app->thumbnailer->get($this->image);
+                // FIXME: разобраться с путем для thumbnails
+                //return Yii::$app->thumbnailer->get('/uploads/' . $this->image);
+                return FileService::getAbsoluteUploadPath($this->image);
             },
             'author',
             'categories',
