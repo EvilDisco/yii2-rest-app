@@ -19,6 +19,7 @@ class ArticleRepository
         $query = Article::find()
             ->innerJoinWith('author')
             ->innerJoinWith('categories')
+            ->groupBy('article.id')
         ;
 
         if (isset($params['title'])) {
