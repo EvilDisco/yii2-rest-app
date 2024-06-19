@@ -8,22 +8,9 @@
 1. Склонируйте проект с Гитхаба и перейдите в папку проекта.
 2. Выполните в терминале команду `docker-compose run --rm backend composer install`
 3. Выполните команду `docker-compose run --rm backend php /app/init --env=Development`
-4. Обновите переменные в `common/config/main-local.php`:
-```
-'components' => [
-    'db' => [
-        'dsn' => env('DB_DSN'),
-        'username' => env('DB_USER'),
-        'password' => env('DB_PASSWORD'),
-    ],
-    
-    ...
-],
-```
-5. Запустите контейнеры: `docker-compose up -d`
-6. Запустите миграции для основной базы данных: `docker-compose run --rm backend yii migrate`
-7. Разверните сиды: `docker-compose run --rm backend yii seed/articles`
-8. Проверьте работу тестовой страницы в браузере: http://127.0.0.1:20080
+4. Запустите контейнеры: `docker-compose up -d`
+5. Запустите миграции для основной базы данных: `docker-compose run --rm backend yii migrate`
+6. Разверните сиды: `docker-compose run --rm backend yii seed/articles`
 
 Команду `yii seed/articles` можно выполнять повторно. В этом случае данные в базе будут перезаписаны новыми.
 
@@ -70,21 +57,11 @@
 
 Для запуска тестов требуется развернуть тестовое окружение:
 
-1. Обновите переменную DSN в `common/config/test-local.php`:
-```
-'components' => [
-    'db' => [
-        'dsn' => env('TEST_DB_DSN'),
-    ],
-    
-    ...
-],
-```
+1. Сгенерируйте вспомогательные файлы для тестового окружения: `docker-compose run --rm backend vendor/bin/codecept build`
 2. Создайте тестовую базу с названием, указанным в `.env`-переменной `TEST_DB_DSN` (по умолчанию `rest_test`).
 3. Запустите миграции для тестовой базы данных: `docker-compose run --rm backend yii_test migrate`
 4. Разверните сиды для тестовой базы данных: `docker-compose run --rm backend yii_test seed/articles`
-5. Сгенерируйте вспомогательные файлы для тестового окружения: `docker-compose run --rm backend vendor/bin/codecept build`
-6. Запустите тесты: `docker-compose run --rm backend vendor/bin/codecept run backend/tests`
+5. Запустите тесты: `docker-compose run --rm backend vendor/bin/codecept run backend/tests`
 
 ### Известные проблемы
 
