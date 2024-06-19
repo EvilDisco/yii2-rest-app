@@ -36,7 +36,7 @@ class ArticleCest
                 'id' => 'integer',
                 'name' => 'string',
                 'desc' => 'string',
-                'parent' => 'array|null',
+                'parent' => 'string|null',
             ],
             '$.[0].categories[0]'
         );
@@ -74,7 +74,7 @@ class ArticleCest
                 'id' => 'integer',
                 'name' => 'string',
                 'desc' => 'string',
-                'parent' => 'array|null',
+                'parent' => 'string|null',
             ],
             '$.categories[0]'
         );

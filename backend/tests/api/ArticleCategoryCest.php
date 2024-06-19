@@ -19,7 +19,7 @@ class ArticleCategoryCest
                 'id' => 'integer',
                 'name' => 'string',
                 'desc' => 'string',
-                'parent' => 'array|null',
+                'parent' => 'string|null',
             ],
             '$.[0]'
         );
@@ -35,7 +35,7 @@ class ArticleCategoryCest
                 'id' => 'integer',
                 'name' => 'string',
                 'desc' => 'string',
-                'parent' => 'array|null',
+                'parent' => 'string|null',
             ]
         );
     }
