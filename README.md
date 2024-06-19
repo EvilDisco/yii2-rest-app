@@ -7,7 +7,7 @@
 
 1. Склонируйте проект с Гитхаба и перейдите в папку проекта.
 2. Выполните в терминале команду `docker-compose run --rm backend composer install`
-3. Выполните команду `docker-compose run --rm backend php /app/init --env=Development --overwrite=All --delete=All`
+3. Выполните команду `docker-compose run --rm backend php /app/init --env=Development`
 4. Обновите переменные в `common/config/main-local.php`:
 ```
 'components' => [
@@ -22,20 +22,49 @@
 ```
 5. Запустите контейнеры: `docker-compose up -d`
 6. Запустите миграции для основной базы данных: `docker-compose run --rm backend yii migrate`
-7. Разверните сиды / фикстуры: `docker-compose run --rm backend yii seed/articles`
+7. Разверните сиды: `docker-compose run --rm backend yii seed/articles`
 8. Проверьте работу тестовой страницы в браузере: http://127.0.0.1:20080
 
 Команду `yii seed/articles` можно выполнять повторно. В этом случае данные в базе будут перезаписаны новыми.
 
 ### Работа с API
 
-Доступны следующие эндпоинты API (общий урл-префикс - http://127.0.0.1:21080/index.php):
-* GET `/api/v1/authors` - коллекция авторов статей
-* GET `/api/v1/authors/{id}` - автор статей
-* GET `/api/v1/categories` - коллекция категорий статей
-* GET `/api/v1/categories/{id}` - категория статьи
-* GET `/api/v1/articles` - коллекция статей
-* GET `/api/v1/articles/{id}` - статья
+Общий урл-префикс эндпоинтов - http://127.0.0.1:21080/index.php
+
+Фильтрация, сортировка и пагинация - GET-параметры.
+
+Для сортировки используется параметр `sort` с указанием нужного поля. Для обратного порядка сортировки перед названием поля нужно поставить знак минуса (например, `sort=-created_at`)
+
+Для пагинации в списках используются параметры `per-page` (кол-во элементов на странице результатов) и `page` (текущая страница).
+
+Доступны следующие эндпоинты API:
+* GET `/api/v1/authors` - получить список авторов статей
+  * фильтрация:
+    * `full_name` - поиск по части ФИО
+  * сортировка:
+    * `full_name` - по ФИО (используется по умолчанию)
+    * `birth_year` - по году рождения
+    * `created_at` - по времени создания
+* GET `/api/v1/authors/{id}` - получить автора статей по id
+* GET `/api/v1/categories` - получить список категорий статей
+  * фильтрация:
+    * `name` - поиск по части названия
+    * `parent_id` - поиск по id родительской категории
+  * сортировка:
+    * `name` - по названию (используется по умолчанию)
+    * `created_at` - по времени создания
+* GET `/api/v1/categories/{id}` - получить категорию статьи по id
+* GET `/api/v1/articles` - получить список статей
+  * фильтрация:
+    * `title` - поиск по части названия
+    * `author_id` - поиск по id автора
+    * `author_full_name` - поиск по части ФИО автора
+    * `category_id` - поиск по id категории
+    * `category_name` - поиск по части названия категории
+  * сортировка:
+    * `created_at` - по времени создания (используется по умолчанию, обратный порядок - "сначала новые")
+    * `title` - по названию
+* GET `/api/v1/articles/{id}` - получить статью по id
 
 ### Тесты
 
@@ -53,21 +82,24 @@
 ```
 2. Создайте тестовую базу с названием, указанным в `.env`-переменной `TEST_DB_DSN` (по умолчанию `rest_test`).
 3. Запустите миграции для тестовой базы данных: `docker-compose run --rm backend yii_test migrate`
-4. Разверните сиды / фикстуры для тестовой базы данных: `docker-compose run --rm backend yii_test seed/articles`
+4. Разверните сиды для тестовой базы данных: `docker-compose run --rm backend yii_test seed/articles`
 5. Сгенерируйте вспомогательные файлы для тестового окружения: `docker-compose run --rm backend vendor/bin/codecept build`
 6. Запустите тесты: `docker-compose run --rm backend vendor/bin/codecept run backend/tests`
 
+### Известные проблемы
+
+Тестовая среда зависит от сидов. При повторном выполнении в тестовом окружении команды сидов тесты сломаются. Чинится повторным созданием тестовой базы с накатом миграций и сидов.
+
 ### Дорожная карта
 
-* DTO - ArticleDtoBuilder и т.д. по примеру https://habr.com/ru/articles/677408/
-* readme - поиск, пагинация, сортировка
-* фикс генерации превью картинок
 * полноценные фикстуры тестов
+* фикс генерации превью картинок
 * FIXME и TODO
+* дополнительные тесты эндпоинтов
+* Swagger
+* phpstan
 * Apache -> nginx
 
 ### Дополнительная информация
 
-За основу взят пакет [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced).
-
-Для тестирования используется библиотека [Codeception](https://github.com/Codeception/Codeception).
+За основу взят пакет [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced)
