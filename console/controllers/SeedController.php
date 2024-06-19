@@ -98,11 +98,17 @@ final class SeedController extends Controller
 
         Console::startProgress(0, self::COUNT_ARTICLE_AUTHORS);
 
+        $genders = ['male', 'female'];
         $authors = [];
 
         for ($i = 0; $i < self::COUNT_ARTICLE_AUTHORS; $i++) {
+            $gender = $genders[array_rand($genders)];
+
             $author = new ArticleAuthor();
-            $author->full_name = $this->faker->name();
+            $author->full_name = $this->faker->lastName($gender)
+                . ' ' . $this->faker->firstName($gender)
+                . ' ' . $this->faker->middleName($gender)
+            ;
             $author->birth_year = $this->faker->year();
             $author->bio = $this->faker->text();
             $author->save();
