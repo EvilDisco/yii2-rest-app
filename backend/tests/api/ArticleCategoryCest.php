@@ -40,9 +40,17 @@ class ArticleCategoryCest
         );
     }
 
-    public function testDeleteArticleCategoryMethodIsDisabled(ApiTester $I): void
+    public function testGetArticleCategoriesListPagination(ApiTester $I): void
     {
-        $I->sendDelete(self::API_BASE_PATH . '/1');
-        $I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
+        $response = $I->sendGet(self::API_BASE_PATH . '?per-page=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->assertEquals(1, count(json_decode($response, true)));
+    }
+
+    public function testNotFoundSingleArticleCategory(ApiTester $I): void
+    {
+        $I->sendDelete(self::API_BASE_PATH . '/528491');
+        $I->seeResponseCodeIs(HttpCode::NOT_FOUND);
     }
 }

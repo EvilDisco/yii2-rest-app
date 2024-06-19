@@ -42,6 +42,14 @@ class ArticleCest
         );
     }
 
+    public function testGetArticlesListPagination(ApiTester $I): void
+    {
+        $response = $I->sendGet(self::API_BASE_PATH . '?per-page=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->assertEquals(1, count(json_decode($response, true)));
+    }
+
     public function testGetSingleArticle(ApiTester $I): void
     {
         $I->sendGet(self::API_BASE_PATH . '/1');
@@ -72,9 +80,9 @@ class ArticleCest
         );
     }
 
-    public function testDeleteArticleMethodIsDisabled(ApiTester $I): void
+    public function testNotFoundSingleArticle(ApiTester $I): void
     {
-        $I->sendDelete(self::API_BASE_PATH . '/1');
-        $I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
+        $I->sendDelete(self::API_BASE_PATH . '/528491');
+        $I->seeResponseCodeIs(HttpCode::NOT_FOUND);
     }
 }

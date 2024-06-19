@@ -8,3 +8,4 @@ modules:
             depends: PhpBrowser
         - REST:
             depends: Yii2
+        - Asserts

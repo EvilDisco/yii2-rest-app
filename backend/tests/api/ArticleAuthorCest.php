@@ -25,6 +25,14 @@ class ArticleAuthorCest
         );
     }
 
+    public function testGetArticleAuthorsListPagination(ApiTester $I): void
+    {
+        $response = $I->sendGet(self::API_BASE_PATH . '?per-page=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeResponseIsJson();
+        $I->assertEquals(1, count(json_decode($response, true)));
+    }
+
     public function testGetSingleArticleAuthor(ApiTester $I): void
     {
         $I->sendGet(self::API_BASE_PATH . '/1');
@@ -38,9 +46,9 @@ class ArticleAuthorCest
         ]);
     }
 
-    public function testDeleteArticleAuthorMethodIsDisabled(ApiTester $I): void
+    public function testNotFoundSingleArticleAuthor(ApiTester $I): void
     {
-        $I->sendDelete(self::API_BASE_PATH . '/1');
-        $I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
+        $I->sendDelete(self::API_BASE_PATH . '/528491');
+        $I->seeResponseCodeIs(HttpCode::NOT_FOUND);
     }
 }
