@@ -38,9 +38,9 @@ class ArticleCategoryRepository
             'sort' => [
                 'defaultOrder' => ['name' => SORT_ASC],
                 'attributes' => [
-                    'id' => [
-                        'asc' => ['id' => SORT_ASC],
-                        'desc' => ['id' => SORT_DESC],
+                    'created_at' => [
+                        'asc' => ['created_at' => SORT_ASC],
+                        'desc' => ['created_at' => SORT_DESC],
                         'default' => SORT_ASC,
                     ],
                     'name' => [
