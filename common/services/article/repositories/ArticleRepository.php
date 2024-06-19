@@ -5,13 +5,14 @@ namespace common\services\article\repositories;
 use common\services\article\builders\ArticleDtoBuilder;
 use common\models\Article\Article;
 use common\services\article\dtos\ArticleDto;
+use common\services\PaginationHelper;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class ArticleRepository
 {
-    public function findAllAsDataProvider(int $pageSize = 20): ActiveDataProvider
+    public function findAllAsDataProvider(): ActiveDataProvider
     {
         $params = Yii::$app->request->get();
 
@@ -53,7 +54,7 @@ class ArticleRepository
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => $pageSize,
+                'pageSize' => PaginationHelper::getPerPage(),
             ],
             'sort' => [
                 'defaultOrder' => ['id' => SORT_DESC],
