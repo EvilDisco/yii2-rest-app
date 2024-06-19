@@ -2,29 +2,30 @@
 
 namespace backend\controllers\api\v1;
 
-use common\models\Article\Article;
-use yii\data\ActiveDataFilter;
-use yii\rest\ActiveController;
+use common\services\article\ArticleService;
+use common\services\article\dtos\ArticleDto;
+use yii\rest\Controller;
+use yii\web\NotFoundHttpException;
 
-class ArticleController extends ActiveController
+class ArticleController extends Controller
 {
-    public $modelClass = Article::class;
-
-    public function actions(): array
+    public function __construct($id, $module, readonly private ArticleService $articleService, $config = [])
     {
-        $actions = parent::actions();
+        parent::__construct($id, $module, $config);
+    }
 
-        unset(
-            $actions['delete'],
-            $actions['create'],
-            $actions['update'],
-        );
+    public function actionIndex(): array
+    {
+        $dataProvider = $this->articleService->getAllAsDataProvider();
 
-        $actions['index']['dataFilter'] = [
-            'class' => ActiveDataFilter::class,
-            'searchModel' => $this->modelClass,
-        ];
+        return $dataProvider->getModels();
+    }
 
-        return $actions;
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id): ArticleDto
+    {
+        return $this->articleService->getSingleAsDto($id);
     }
 }

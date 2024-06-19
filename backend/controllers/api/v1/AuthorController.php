@@ -2,29 +2,30 @@
 
 namespace backend\controllers\api\v1;
 
-use common\models\Article\ArticleAuthor;
-use yii\data\ActiveDataFilter;
-use yii\rest\ActiveController;
+use common\services\article\ArticleAuthorService;
+use common\services\article\dtos\ArticleAuthorDto;
+use yii\rest\Controller;
+use yii\web\NotFoundHttpException;
 
-class AuthorController extends ActiveController
+class AuthorController extends Controller
 {
-    public $modelClass = ArticleAuthor::class;
-
-    public function actions(): array
+    public function __construct($id, $module, readonly private ArticleAuthorService $authorService, $config = [])
     {
-        $actions = parent::actions();
+        parent::__construct($id, $module, $config);
+    }
 
-        unset(
-            $actions['delete'],
-            $actions['create'],
-            $actions['update'],
-        );
+    public function actionIndex(): array
+    {
+        $dataProvider = $this->authorService->getAllAsDataProvider();
 
-        $actions['index']['dataFilter'] = [
-            'class' => ActiveDataFilter::class,
-            'searchModel' => $this->modelClass,
-        ];
+        return $dataProvider->getModels();
+    }
 
-        return $actions;
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id): ArticleAuthorDto
+    {
+        return $this->authorService->getSingleAsDto($id);
     }
 }
