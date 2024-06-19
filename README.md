@@ -6,8 +6,8 @@
 Предполагается, что базовое программное окружение настроено (docker, docker-compose).
 
 1. Склонируйте проект с Гитхаба и перейдите в папку проекта.
-2. Выполните в терминале команду `docker-compose run --rm backend composer install`
-3. Выполните команду `docker-compose run --rm backend php /app/init --env=Development`
+2. Выполните команду установки пакетов: `docker-compose run --rm backend composer install`
+3. Выполните команду инициализации приложения: `docker-compose run --rm backend php /app/init --env=Development`
 4. Запустите контейнеры: `docker-compose up -d`
 5. Запустите миграции для основной базы данных: `docker-compose run --rm backend yii migrate`
 6. Разверните сиды: `docker-compose run --rm backend yii seed/articles`
